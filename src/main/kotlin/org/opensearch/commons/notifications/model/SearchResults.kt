@@ -12,14 +12,14 @@ import org.opensearch.action.search.SearchResponse
 import org.opensearch.common.io.stream.StreamInput
 import org.opensearch.common.io.stream.StreamOutput
 import org.opensearch.common.io.stream.Writeable
-import org.opensearch.common.xcontent.ToXContent.Params
-import org.opensearch.common.xcontent.XContentBuilder
-import org.opensearch.common.xcontent.XContentParser
 import org.opensearch.common.xcontent.XContentParserUtils
 import org.opensearch.commons.notifications.NotificationConstants.START_INDEX_TAG
 import org.opensearch.commons.notifications.NotificationConstants.TOTAL_HITS_TAG
 import org.opensearch.commons.notifications.NotificationConstants.TOTAL_HIT_RELATION_TAG
 import org.opensearch.commons.utils.logger
+import org.opensearch.core.xcontent.ToXContent
+import org.opensearch.core.xcontent.XContentBuilder
+import org.opensearch.core.xcontent.XContentParser
 import org.opensearch.search.SearchHit
 
 abstract class SearchResults<ItemClass : BaseModel> : BaseModel {
@@ -187,7 +187,7 @@ abstract class SearchResults<ItemClass : BaseModel> : BaseModel {
     /**
      * {@inheritDoc}
      */
-    override fun toXContent(builder: XContentBuilder?, params: Params?): XContentBuilder {
+    override fun toXContent(builder: XContentBuilder?, params: ToXContent.Params?): XContentBuilder {
         builder!!.startObject()
             .field(START_INDEX_TAG, startIndex)
             .field(TOTAL_HITS_TAG, totalHits)
